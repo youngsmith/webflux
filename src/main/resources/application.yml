@@ -1,3 +1,4 @@
+# 레디스 접속 정보
 spring:
   redis:
     host: localhost
