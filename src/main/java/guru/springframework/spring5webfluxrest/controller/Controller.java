@@ -1,7 +1,6 @@
-package guru.springframework.spring5webfluxrest;
+package guru.springframework.spring5webfluxrest.controller;
 
 import guru.springframework.spring5webfluxrest.dto.ApiResult;
-import guru.springframework.spring5webfluxrest.dto.BoxOfficeResult;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
@@ -13,7 +12,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import javax.swing.text.DateFormatter;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;

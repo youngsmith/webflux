@@ -1,9 +1,13 @@
 package guru.springframework.spring5webfluxrest.dto;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Movie {
     String rnum;
     String rank;

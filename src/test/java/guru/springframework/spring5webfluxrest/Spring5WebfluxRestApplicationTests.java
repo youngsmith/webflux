@@ -1,19 +1,19 @@
 package guru.springframework.spring5webfluxrest;
 
+import org.apache.commons.lang3.EnumUtils;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.mongodb.util.BsonUtils;
 import org.springframework.test.context.junit4.SpringRunner;
-import reactor.core.CoreSubscriber;
 import reactor.core.publisher.*;
 import reactor.test.StepVerifier;
 import reactor.util.function.Tuple2;
 
 import java.time.Duration;
-import java.util.Objects;
+import java.util.Arrays;
+import java.util.List;
 
 import static java.time.Duration.ofSeconds;
 
@@ -172,4 +172,28 @@ public class Spring5WebfluxRestApplicationTests {
 				.share();
 	}
 
+
+
+	public enum Jang {
+		cash("a", Arrays.asList("a","b","c")),
+		card("b", Arrays.asList("d","e"));
+
+		private String title;
+		private List<String> payList;
+
+
+		Jang(String a, List<String> asList) {
+			title = a;
+			payList = asList;
+		}
+
+		public void has() {
+			System.out.println(Jang.values());
+		}
+	}
+
+	@Test
+	public void test_enum() {
+
+	}
 }
