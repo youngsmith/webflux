@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.ReactiveHashOperations;
 import org.springframework.data.redis.core.ReactiveRedisOperations;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 import reactor.core.publisher.Mono;
 
 import java.util.HashMap;
@@ -20,13 +21,13 @@ public class BookRedisService {
      * 레디스의 string 타입을 사용하여, 이를 삽입한다.
      */
     public Mono<Boolean> put(String key, Book val) {
-        System.out.println("key : " + key + ", val : " + val);
+        System.out.println(String.format("key:%s val:%s", key, val));
         return redisTemplate.opsForValue().set(key, val);
     }
 
-    public Mono<Object> get(String key) {
-        System.out.println("key : " + key);
-        return redisTemplate.opsForHash().get("Book", key);
+    public Mono<Book> get(String key) {
+        System.out.println(String.format("key:%s", key));
+        return redisTemplate.opsForValue().get(key);
     }
 
     /**
@@ -39,7 +40,7 @@ public class BookRedisService {
         Map<String, String> result = new HashMap<>();
         result.put("a","b");
         result.put("c","d");
-        System.out.println("key : " + key + ", val : " + result);
+        System.out.println(String.format("key:%s val:%s", key, val));
         return redisTemplate.opsForHash().putAll(key, result);
     }
 
@@ -57,7 +58,18 @@ public class BookRedisService {
     }
 
 
-
-
+    /**
+     * 레디스에 없을 경우에 대한 함수
+     */
+    public Mono<Book> getIfAbsent(String key) {
+        return redisTemplate.opsForValue()
+                .get(key)
+                .doOnNext(e -> {
+                    System.out.println(e);
+                })
+                .filter(e -> {
+                    return !ObjectUtils.isEmpty(e);
+                });
+    }
 
 }

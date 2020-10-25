@@ -1,6 +1,7 @@
 package guru.springframework.spring5webfluxrest.controller;
 
 import guru.springframework.spring5webfluxrest.Service.BookRedisService;
+import guru.springframework.spring5webfluxrest.dto.Book;
 import guru.springframework.spring5webfluxrest.util.BookUtil;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -13,13 +14,19 @@ import reactor.core.publisher.Mono;
 public class BookController {
     private final BookRedisService bookRedisService;
 
+
+    @GetMapping("/get/if-not-exist/{key}")
+    public Mono<Book> getBook2(@PathVariable("key") String key) {
+        return bookRedisService.getIfAbsent(key);
+    }
+
     @GetMapping("/add/{key}")
     public Mono<Boolean> addBook(@PathVariable("key") String key) {
         return bookRedisService.put(key, BookUtil.makeBook());
     }
 
     @GetMapping("/get/{key}")
-    public Mono<Object> getBook(@PathVariable("key") String key) {
+    public Mono<Book> getBook(@PathVariable("key") String key) {
         return bookRedisService.get(key);
     }
 
