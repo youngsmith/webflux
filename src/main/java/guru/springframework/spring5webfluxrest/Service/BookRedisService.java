@@ -1,9 +1,7 @@
 package guru.springframework.spring5webfluxrest.Service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import guru.springframework.spring5webfluxrest.dto.Book;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.redis.core.ReactiveHashOperations;
 import org.springframework.data.redis.core.ReactiveRedisOperations;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
@@ -67,9 +65,7 @@ public class BookRedisService {
                 .doOnNext(e -> {
                     System.out.println(e);
                 })
-                .filter(e -> {
-                    return !ObjectUtils.isEmpty(e);
-                });
+                .filter(e -> !ObjectUtils.isEmpty(e));
     }
 
 }
