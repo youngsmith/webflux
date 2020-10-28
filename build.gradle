@@ -27,6 +27,11 @@ repositories {
 	maven { url "https://repo.spring.io/milestone" }
 }
 
+configurations {
+	all {
+		exclude group: 'org.springframework.boot', module: 'spring-boot-starter-logging'
+	}
+}
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-redis-reactive')
@@ -39,4 +44,9 @@ dependencies {
 	compileOnly "org.projectlombok:lombok:1.16.16"
 	compileOnly "com.fasterxml.jackson.core:jackson-databind:2.8.7"
 	compile group: 'com.github.javafaker', name: 'javafaker', version: '1.0.2'
+	// https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-log4j2
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-log4j2', version: '2.1.2.RELEASE'
+	// https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-yaml
+	compile group: 'com.fasterxml.jackson.dataformat', name: 'jackson-dataformat-yaml', version: '2.11.1'
+
 }
